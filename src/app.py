@@ -8,8 +8,11 @@ import json
 from copy import deepcopy
 
 # load geojson
-with open(r'.\data\raw\georef-switzerland-kanton.geojson') as geojson_CH:
-    geojson = json.load(geojson_CH)
+#with open(r'.\data\raw\georef-switzerland-kanton.geojson') as geojson_CH:
+    #geojson = json.load(geojson_CH)
+
+with open('./data/raw/georef-switzerland-kanton.geojson') as geojson_CH:
+     geojson = json.load(geojson_CH)
 
 # First some Clean Energy Data Exploration
 @st.cache
@@ -17,7 +20,8 @@ def load_data(path):
     df = pd.read_csv(path)
     return df
 
-nrg_df_raw = load_data(path=r".\data\raw\renewable_power_plants_CH_upd.csv")
+#nrg_df_raw = load_data(path=r".\data\raw\renewable_power_plants_CH_upd.csv")
+nrg_df_raw = load_data(path="./data/raw/renewable_power_plants_CH_upd.csv")
 nrg_df = deepcopy(nrg_df_raw)
 nrg_by_KT_capacity = nrg_df.groupby(['canton'])['electrical_capacity'].count().reset_index(name='count')
 
